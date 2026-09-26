@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { usePlan } from "@/context/PlanContext";
 import { Workout } from "@/types";
 import PlanCard from "@/components/PlanCard";
@@ -10,12 +11,21 @@ import { FaChevronDown } from "react-icons/fa";
 type Tab = "plan" | "saved";
 type SortKey = "duration" | "caloriesBurned" | "rating";
 
-export default function MyPlanPage() {
+function MyPlanContent() {
   const { plan, saved, loaded } = usePlan();
-  const [activeTab, setActiveTab] = useState<Tab>("plan");
+  const searchParams = useSearchParams();
+
+  // navbar click 
+
+  const [activeTab, setActiveTab] = useState<Tab>(
+    searchParams.get("tab") === "saved" ? "saved" : "plan"
+  );
   const [sortBy, setSortBy] = useState<SortKey>("duration");
 
-// Loading 
+
+
+  
+  // Loading 
 
   if (!loaded) {
     return (
@@ -26,7 +36,6 @@ export default function MyPlanPage() {
   }
 
   const currentList = activeTab === "plan" ? plan : saved;
-
   const sortedList = [...currentList].sort((a, b) => b[sortBy] - a[sortBy]);
 
   const totalMinutes = plan.reduce((sum, w) => sum + w.duration, 0);
@@ -40,16 +49,13 @@ export default function MyPlanPage() {
   return (
     <main className="max-w-[1400px] mx-auto px-6 py-8">
 
-
-{/* title */}
+{/* Title */}
       <h1 className="text-3xl font-bold uppercase">My Plan</h1>
       <p className="text-gray-500 text-sm mt-1">
         Cap of five lifts for today. Finish them, then load more.
       </p>
 
-
-
- {/* Summary */}
+{/* Summary */}
       <div className="bg-[#15171c] rounded-2xl mt-6 grid grid-cols-3 divide-x divide-white/5">
         <div className="p-5">
           <p className="text-gray-500 text-xs uppercase">Exercises</p>
@@ -67,10 +73,7 @@ export default function MyPlanPage() {
         </div>
       </div>
 
-
-
-
-{/* Tabs and Sort */}
+{/* Tabs */}
       <div className="flex items-center justify-between mt-6 flex-wrap gap-3">
         <div className="flex gap-2">
           {tabs.map((tab) => (
@@ -91,8 +94,7 @@ export default function MyPlanPage() {
 
 
 
-
-{/* Sort By */}
+ {/* Sorting  */}
         <div className="flex items-center gap-2">
           <span className="text-gray-500 text-xs">Sort By</span>
           <div className="relative">
@@ -110,8 +112,9 @@ export default function MyPlanPage() {
         </div>
       </div>
 
-      {/* empty state */}
-      
+
+
+{/*empty state */}
       <div className="mt-5 space-y-3">
         {sortedList.length === 0 ? (
           <div className="border border-dashed border-white/10 rounded-2xl py-16 text-center">
@@ -133,5 +136,19 @@ export default function MyPlanPage() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function MyPlanPage() {
+  return (
+    <Suspense
+      fallback={
+        <p className="text-center py-20 text-gray-500 text-sm">
+          Loading workouts…
+        </p>
+      }
+    >
+      <MyPlanContent />
+    </Suspense>
   );
 }

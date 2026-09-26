@@ -53,18 +53,24 @@ export default function Navbar() {
 
 {/*badges counts */}
         <div className="flex items-center gap-5 text-sm">
-          <span className="text-gray-300">
+          <Link
+            href="/my-plan?tab=plan"
+            className="flex items-center gap-1.5 text-gray-300 hover:text-white transition"
+          >
             Plan
-            <span className="ml-1.5 inline-flex items-center justify-center bg-[#ccff00] text-black text-xs font-bold min-w-[22px] h-[22px] px-1.5 rounded-full">
+            <span className="inline-flex items-center justify-center bg-[#ccff00] text-black text-xs font-bold min-w-[22px] h-[22px] px-1.5 rounded-full">
               {plan.length}
             </span>
-          </span>
-          <span className="text-gray-300">
+          </Link>
+          <Link
+            href="/my-plan?tab=saved"
+            className="flex items-center gap-1.5 text-gray-300 hover:text-white transition"
+          >
             Saved
-            <span className="ml-1.5 inline-flex items-center justify-center bg-[#ccff00] text-black text-xs font-bold min-w-[22px] h-[22px] px-1.5 rounded-full">
+            <span className="inline-flex items-center justify-center bg-[#ccff00] text-black text-xs font-bold min-w-[22px] h-[22px] px-1.5 rounded-full">
               {saved.length}
             </span>
-          </span>
+          </Link>
         </div>
       </nav>
     </header>
