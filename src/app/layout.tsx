@@ -3,6 +3,7 @@ import { Oswald } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { PlanProvider } from "@/context/PlanContext";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -23,10 +24,12 @@ export default function RootLayout({
       <body
         className={`${oswald.className} bg-[#0d0d0d] text-white antialiased min-h-screen flex flex-col`}
       >
-        <Navbar />
-        <div className="flex-1">{children}</div>
-        <Footer />
-        <Toaster position="top-right" />
+        <PlanProvider>
+          <Navbar />
+          <div className="flex-1">{children}</div>
+          <Footer />
+          <Toaster position="top-right" />
+        </PlanProvider>
       </body>
     </html>
   );
