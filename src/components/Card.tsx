@@ -6,7 +6,9 @@ export default function Card({ workout }: { workout: Workout }) {
   return (
     <Link href={`/workout/${workout.id}`} className="block">
       <div className="bg-[#161616] rounded-2xl overflow-hidden hover:ring-1 hover:ring-[#ccff00]/40 transition h-full">
-        {/* Image with overlapping muscle-group tags */}
+
+
+{/* image with group tags */}
         <div className="relative">
           <img
             src={workout.image}

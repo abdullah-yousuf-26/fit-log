@@ -4,7 +4,9 @@ export default function Hero() {
   return (
     <section className="max-w-[1400px] mx-auto px-6 pt-8 pb-6">
       <div className="bg-[#15171c] rounded-3xl px-8 py-12 md:px-14 md:py-16 grid md:grid-cols-2 gap-10 items-center">
-        {/* Left — Text */}
+
+
+{/* Text */}
         <div>
           <p className="text-[#ccff00] text-xs tracking-[0.3em] mb-5 font-medium">
             WORKOUT LIBRARY
@@ -24,7 +26,9 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Right — Athlete image */}
+
+
+{/* Right side image */}
         <div className="relative">
           <img
             src="/banner.png"

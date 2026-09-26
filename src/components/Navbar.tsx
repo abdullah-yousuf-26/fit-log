@@ -16,13 +16,18 @@ export default function Navbar() {
   return (
     <header className="border-b border-white/5 relative">
       <nav className="max-w-[1400px] mx-auto flex items-center justify-between px-6 py-4">
-        {/* Left — Logo */}
+
+
+
+{/*Logo */}
         <Link href="/" className="flex items-center gap-2">
           <img src="/logo.png" alt="FitLog logo" className="w-6 h-6 object-contain" />
           <span className="text-lg font-bold tracking-widest">FITLOG</span>
         </Link>
 
-        {/* Center — Links */}
+
+
+{/*Links */}
         <ul className="hidden md:flex items-center gap-2 absolute left-1/2 -translate-x-1/2">
           {links.map((link) => {
             const isActive = pathname === link.href;
@@ -43,7 +48,10 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Right — Status badges (LIVE counts) */}
+
+
+
+{/*badges counts */}
         <div className="flex items-center gap-5 text-sm">
           <span className="text-gray-300">
             Plan

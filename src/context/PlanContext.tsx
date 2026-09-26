@@ -21,7 +21,8 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
   const [saved, setSaved] = useState<Workout[]>([]);
   const [loaded, setLoaded] = useState(false);
 
-  // Load from localStorage on first render
+// reload from storage 
+
   useEffect(() => {
     const storedPlan = localStorage.getItem("fitlog-plan");
     const storedSaved = localStorage.getItem("fitlog-saved");
@@ -30,7 +31,10 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
     setLoaded(true);
   }, []);
 
-  // Persist whenever state changes
+
+
+  
+//state changes
   useEffect(() => {
     localStorage.setItem("fitlog-plan", JSON.stringify(plan));
   }, [plan]);

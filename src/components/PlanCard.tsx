@@ -23,17 +23,19 @@ export default function PlanCard({
   const handleRemove = () => {
     if (tab === "plan") removeFromPlan(workout.id);
     else removeFromSaved(workout.id);
-    toast.success("Removed from list");
+    toast.success("Removed from list ");
   };
 
   return (
     <div className="bg-[#15171c] border border-white/5 rounded-2xl p-4 flex items-center gap-4 flex-wrap">
-      {/* Thumbnail */}
+{/* image banner */}
       <img
         src={workout.image}
         alt={workout.name}
         className="w-16 h-16 rounded-xl object-cover shrink-0"
       />
+
+
 
       {/* Info */}
       <div className="flex-1 min-w-[180px]">
@@ -52,7 +54,9 @@ export default function PlanCard({
         </div>
       </div>
 
-      {/* Actions */}
+
+
+{/* actie actions */}
       <div className="flex items-center gap-2">
         <Link
           href={`/workout/${workout.id}`}

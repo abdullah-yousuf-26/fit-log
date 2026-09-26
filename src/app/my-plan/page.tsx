@@ -15,7 +15,8 @@ export default function MyPlanPage() {
   const [activeTab, setActiveTab] = useState<Tab>("plan");
   const [sortBy, setSortBy] = useState<SortKey>("duration");
 
-  // Loading state (README requirement)
+// Loading 
+
   if (!loaded) {
     return (
       <p className="text-center py-20 text-gray-500 text-sm">
@@ -38,13 +39,17 @@ export default function MyPlanPage() {
 
   return (
     <main className="max-w-[1400px] mx-auto px-6 py-8">
-      {/* Title */}
+
+
+{/* title */}
       <h1 className="text-3xl font-bold uppercase">My Plan</h1>
       <p className="text-gray-500 text-sm mt-1">
         Cap of five lifts for today. Finish them, then load more.
       </p>
 
-      {/* Metrics Summary */}
+
+
+ {/* Summary */}
       <div className="bg-[#15171c] rounded-2xl mt-6 grid grid-cols-3 divide-x divide-white/5">
         <div className="p-5">
           <p className="text-gray-500 text-xs uppercase">Exercises</p>
@@ -62,7 +67,10 @@ export default function MyPlanPage() {
         </div>
       </div>
 
-      {/* Tabs + Sort */}
+
+
+
+{/* Tabs and Sort */}
       <div className="flex items-center justify-between mt-6 flex-wrap gap-3">
         <div className="flex gap-2">
           {tabs.map((tab) => (
@@ -80,7 +88,11 @@ export default function MyPlanPage() {
           ))}
         </div>
 
-        {/* Sort By (Challenge C1) */}
+
+
+
+
+{/* Sort By */}
         <div className="flex items-center gap-2">
           <span className="text-gray-500 text-xs">Sort By</span>
           <div className="relative">
@@ -98,7 +110,8 @@ export default function MyPlanPage() {
         </div>
       </div>
 
-      {/* List / Empty state */}
+      {/* empty state */}
+      
       <div className="mt-5 space-y-3">
         {sortedList.length === 0 ? (
           <div className="border border-dashed border-white/10 rounded-2xl py-16 text-center">
