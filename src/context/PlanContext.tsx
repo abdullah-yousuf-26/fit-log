@@ -6,8 +6,12 @@ import { Workout } from "@/types";
 interface PlanContextType {
   plan: Workout[];
   saved: Workout[];
+  loaded: boolean;
   addToPlan: (workout: Workout) => void;
   saveForLater: (workout: Workout) => void;
+  removeFromPlan: (id: number) => void;
+  removeFromSaved: (id: number) => void;
+  markAsDone: (id: number) => void;
 }
 
 const PlanContext = createContext<PlanContextType | undefined>(undefined);
@@ -15,6 +19,7 @@ const PlanContext = createContext<PlanContextType | undefined>(undefined);
 export function PlanProvider({ children }: { children: React.ReactNode }) {
   const [plan, setPlan] = useState<Workout[]>([]);
   const [saved, setSaved] = useState<Workout[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   // Load from localStorage on first render
   useEffect(() => {
@@ -22,6 +27,7 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
     const storedSaved = localStorage.getItem("fitlog-saved");
     if (storedPlan) setPlan(JSON.parse(storedPlan));
     if (storedSaved) setSaved(JSON.parse(storedSaved));
+    setLoaded(true);
   }, []);
 
   // Persist whenever state changes
@@ -45,8 +51,31 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const removeFromPlan = (id: number) => {
+    setPlan((prev) => prev.filter((w) => w.id !== id));
+  };
+
+  const removeFromSaved = (id: number) => {
+    setSaved((prev) => prev.filter((w) => w.id !== id));
+  };
+
+  const markAsDone = (id: number) => {
+    setPlan((prev) => prev.filter((w) => w.id !== id));
+  };
+
   return (
-    <PlanContext.Provider value={{ plan, saved, addToPlan, saveForLater }}>
+    <PlanContext.Provider
+      value={{
+        plan,
+        saved,
+        loaded,
+        addToPlan,
+        saveForLater,
+        removeFromPlan,
+        removeFromSaved,
+        markAsDone,
+      }}
+    >
       {children}
     </PlanContext.Provider>
   );
